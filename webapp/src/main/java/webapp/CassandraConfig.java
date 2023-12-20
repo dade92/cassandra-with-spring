@@ -7,13 +7,12 @@ import org.springframework.data.cassandra.SessionFactory;
 import org.springframework.data.cassandra.config.CqlSessionFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.config.SessionFactoryFactoryBean;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.data.cassandra.core.convert.CassandraConverter;
 import org.springframework.data.cassandra.core.convert.MappingCassandraConverter;
+import org.springframework.data.cassandra.core.cql.CqlTemplate;
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.SimpleUserTypeResolver;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
 @Configuration
 public class CassandraConfig {
@@ -33,7 +32,7 @@ public class CassandraConfig {
         SessionFactoryFactoryBean sessionFactory = new SessionFactoryFactoryBean();
         sessionFactory.setSession(session);
         sessionFactory.setConverter(converter);
-        sessionFactory.setSchemaAction(SchemaAction.NONE);
+        sessionFactory.setSchemaAction(SchemaAction.CREATE_IF_NOT_EXISTS);
 
         return sessionFactory;
     }
@@ -54,5 +53,10 @@ public class CassandraConfig {
     @Bean
     public CassandraTemplate cassandraTemplate(SessionFactory sessionFactory, CassandraConverter converter) {
         return new CassandraTemplate(sessionFactory, converter);
+    }
+
+    @Bean
+    public CqlTemplate cqlTemplate(CqlSession cqlSession) {
+        return new CqlTemplate(cqlSession);
     }
 }

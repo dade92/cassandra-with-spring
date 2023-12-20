@@ -12,10 +12,13 @@ public class Vet {
 
     private String surname;
 
+    private List<String> specialties;
+
     public Vet(String id, String name, String surname, List<String> specialties) {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.specialties = specialties;
     }
 
     public String getId() {
@@ -40,5 +43,13 @@ public class Vet {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public List<String> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<String> specialties) {
+        this.specialties = specialties;
     }
 }
