@@ -52,7 +52,7 @@ public class CassandraConfig {
     }
 
     @Bean
-    public CassandraOperations cassandraTemplate(SessionFactory sessionFactory, CassandraConverter converter) {
+    public CassandraTemplate cassandraTemplate(SessionFactory sessionFactory, CassandraConverter converter) {
         return new CassandraTemplate(sessionFactory, converter);
     }
 }

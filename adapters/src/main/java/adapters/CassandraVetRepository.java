@@ -2,22 +2,23 @@ package adapters;
 
 import domain.VetRepository;
 import org.springframework.data.cassandra.core.CassandraOperations;
+import org.springframework.data.cassandra.core.CassandraTemplate;
 
 import java.util.UUID;
 
 public class CassandraVetRepository  implements VetRepository {
 
-    private final CassandraOperations cassandraOperations;
+    private final CassandraOperations cassandraTemplate;
 
     public CassandraVetRepository(
-        CassandraOperations cassandraOperations
+        CassandraTemplate cassandraTemplate
     ) {
-        this.cassandraOperations = cassandraOperations;
+        this.cassandraTemplate = cassandraTemplate;
     }
 
     @Override
     public void add(domain.Vet vet) {
-       cassandraOperations.insert(toEntity(vet));
+       cassandraTemplate.insert(toEntity(vet));
     }
 
     private static Vet toEntity(domain.Vet vet) {
