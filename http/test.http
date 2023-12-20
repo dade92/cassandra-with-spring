@@ -1,54 +1,5 @@
 ### inserts a new customer
 
-POST http://localhost:8080/insert
+POST http://localhost:8080/add
 Content-Type: application/json
 Accept: application/json
-
-{
-    "name": "Carlo",
-    "age": 32,
-    "favouriteDestinations": {
-        "destinations": [
-            {
-                "city": "Milan"
-            },
-            {
-                "city": "London"
-            }
-        ]
-    }
-}
-
-### find by name
-
-GET {{localhost}}/find?name=Carlo
-Content-Type: application/json
-Accept: application/json
-
-### find by id
-
-GET {{localhost}}/findById?id=2d4de2b4-05bd-486c-9a46-3574b55bb35c
-Content-Type: application/json
-Accept: application/json
-
-### retrieve all users
-
-GET {{localhost}}/retrieveUsers
-Content-Type: application/json
-Accept: application/json
-
-### retrieve translations
-
-GET {{localhost}}/translations/en
-Content-Type: application/json
-Accept: application/json
-
-### sends message through websocket
-
-POST {{localhost}}/send
-Content-Type: application/json
-Accept: application/json
-
-{
-  "message": "Hey there!!!"
-}

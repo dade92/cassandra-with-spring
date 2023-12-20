@@ -1,11 +1,11 @@
 package webapp;
 
 import adapters.CassandraVetRepository;
-import adapters.DaoVetEntity;
 import domain.AddVetUseCase;
 import domain.VetRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.cassandra.core.CassandraOperations;
 
 @Configuration
 public class VetConfiguration {
@@ -16,8 +16,8 @@ public class VetConfiguration {
     }
 
     @Bean
-    public VetRepository vetRepository(DaoVetEntity daoVetEntity) {
-        return new CassandraVetRepository(daoVetEntity);
+    public VetRepository vetRepository(CassandraOperations cassandraTemplate) {
+        return new CassandraVetRepository(cassandraTemplate);
     }
 
 

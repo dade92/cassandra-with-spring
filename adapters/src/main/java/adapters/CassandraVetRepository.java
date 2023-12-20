@@ -1,26 +1,26 @@
 package adapters;
 
-import domain.Vet;
 import domain.VetRepository;
+import org.springframework.data.cassandra.core.CassandraOperations;
 
 import java.util.UUID;
 
 public class CassandraVetRepository  implements VetRepository {
 
-    private final DaoVetEntity daoVetEntity;
+    private final CassandraOperations cassandraOperations;
 
     public CassandraVetRepository(
-        DaoVetEntity daoVetEntity
+        CassandraOperations cassandraOperations
     ) {
-        this.daoVetEntity = daoVetEntity;
+        this.cassandraOperations = cassandraOperations;
     }
 
     @Override
-    public void add(Vet vet) {
-       daoVetEntity.save(toEntity(vet));
+    public void add(domain.Vet vet) {
+       cassandraOperations.insert(toEntity(vet));
     }
 
-    private static VetRecord toEntity(Vet vet) {
-        return new VetRecord(UUID.randomUUID(), vet.name(), vet.surname(), vet.specialties());
+    private static Vet toEntity(domain.Vet vet) {
+        return new Vet(UUID.randomUUID().toString(), vet.name(), vet.surname(), vet.specialties().stream().toList());
     }
 }
