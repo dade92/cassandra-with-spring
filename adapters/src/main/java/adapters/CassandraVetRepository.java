@@ -7,7 +7,7 @@ import org.springframework.data.cassandra.core.cql.CqlTemplate;
 
 import java.util.UUID;
 
-public class CassandraVetRepository  implements VetRepository {
+public class CassandraVetRepository implements VetRepository {
 
     private final CqlTemplate cqlTemplate;
 
@@ -19,9 +19,9 @@ public class CassandraVetRepository  implements VetRepository {
 
     @Override
     public void add(domain.Vet vet) {
-        PreparedStatement preparedStatement = cqlTemplate.getSession().prepare("insert into vet (id, name, surname) values (?, ?, ?)");
-        Statement insertStatement = preparedStatement.bind(UUID.randomUUID().toString(), vet.name(), vet.surname());
-       cqlTemplate.execute(insertStatement);
+        PreparedStatement preparedStatement = cqlTemplate.getSession().prepare("insert into vet (id, name, surname, specialties) values (?, ?, ?, ?)");
+        Statement insertStatement = preparedStatement.bind(UUID.randomUUID().toString(), vet.name(), vet.surname(), vet.specialties());
+        cqlTemplate.execute(insertStatement);
     }
 
     private Vet toEntity(domain.Vet vet) {

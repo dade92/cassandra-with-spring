@@ -6,5 +6,5 @@ CREATE TABLE vet (
                      id          text primary key,
                      name        text,
                      surname     text,
-                     specialties text
+                     specialties SET<text>
 );
